@@ -59,6 +59,18 @@ def home(): return render_template("index.html")
 @app.get("/create")
 def create_page(): return render_template("create.html")
 
+@app.get("/login")
+def login_page(): return render_template("login.html")
+
+@app.get("/register")
+def register_page(): return render_template("register.html")
+
+@app.get("/profile")
+def profile_page(): return render_template("profile.html")
+
+@app.get("/u/<username>")
+def public_profile(username): return render_template("public_profile.html", username=username)
+
 @app.get("/p/<poll_id>")
 def vote_page(poll_id):
     if not poll_json(poll_id): return "Опрос не найден",404
