@@ -5,12 +5,21 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>XYVERA</title>
   <link rel="stylesheet" href="/static/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/static/auth.js" defer></script>
 </head>
 <body>
   <main class="wrap">
     <header>
       <div class="brand">XYVERA</div>
-      <a href="/create" class="button">Создать</a>
+      <nav style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <span id="auth-user" style="display:none"></span>
+        <a id="login-link" href="/login" class="button">Войти</a>
+        <a id="register-link" href="/register" class="button">Регистрация</a>
+        <a id="profile-link" href="/profile" class="button" style="display:none">Профиль</a>
+        <button id="logout-button" type="button" class="button" style="display:none">Выйти</button>
+        <a href="/create" class="button">Создать</a>
+      </nav>
     </header>
 
     <section class="hero">
@@ -40,5 +49,31 @@
       </article>
     </section>
   </main>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      const login = document.getElementById("login-link");
+      const register = document.getElementById("register-link");
+      const profile = document.getElementById("profile-link");
+      const logout = document.getElementById("logout-button");
+
+      const supabaseClient = window.supabaseClient;
+
+      if (!supabaseClient) return;
+
+      supabaseClient.auth.getSession().then(({ data }) => {
+        const loggedIn = !!data.session;
+        login.style.display = loggedIn ? "none" : "inline-block";
+        register.style.display = loggedIn ? "none" : "inline-block";
+        profile.style.display = loggedIn ? "inline-block" : "none";
+        logout.style.display = loggedIn ? "inline-block" : "none";
+      });
+
+      logout.addEventListener("click", async () => {
+        await supabaseClient.auth.signOut();
+        window.location.reload();
+      });
+    });
+  </script>
 </body>
 </html>
