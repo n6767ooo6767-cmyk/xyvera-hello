@@ -1,2 +1,10 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>XYVERA — Features</title><link rel="stylesheet" href="/static/style.css"></head><body><main class="wrap"><header><div class="brand">XYVERA</div><nav><a class="button" href="/">Главная</a><a class="button" href="/profile">Профиль</a></nav></header><section class="hero"><p class="eyebrow">XYVERA FEATURE CENTER</p><h1>80 возможностей.<br>Одна платформа.</h1><p>Опросы, таймеры, профили, OBS и инструменты создателя в одном месте.</p></section><section class="cards">{% for feature in features %}<article><b>{{ loop.index }}. {{ feature }}</b><span>Модуль XYVERA</span></article>{% endfor %}</section></main></body></html>
+<html lang="ru">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>XYVERA — возможности</title><link rel="stylesheet" href="/static/style.css"></head>
+<body>
+<main class="wrap">
+<header><a class="brand" href="/">XYVERA</a><nav><a class="button" href="/">Главная</a><a class="button primary" href="/create">Создать</a><a class="button" href="/profile">Профиль</a></nav></header>
+<section class="hero"><p class="eyebrow">XYVERA PLATFORM</p><h1>Все возможности</h1><p>80 функций в одной платформе: опросы, таймеры, профили, OBS, тарифы, безопасность и аналитика.</p></section>
+<section class="feature-grid">{% for feature in features %}<article class="feature-card"><span class="feature-number">{{ loop.index }}</span><b>{{ feature }}</b><small>{% if loop.index <= 20 %}Опросы и голосования{% elif loop.index <= 30 %}Профили и оформление{% elif loop.index <= 40 %}Таймеры{% elif loop.index <= 50 %}Стриминг и OBS{% elif loop.index <= 60 %}Тарифы и доступ{% elif loop.index <= 70 %}Модерация и безопасность{% else %}Аналитика и данные{% endif %}</small></article>{% endfor %}</section>
+</main>
+</body></html>
